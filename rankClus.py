@@ -11,7 +11,7 @@ class Config:
     # Number of iteration
     t = 5
     # Cluster numbers for type set. Default is 10
-    K = 10
+    K = 23
     # Rank method: [Simple_rank|Authority_rank]. Default is 'Simple_rank'
     rank_method = 'Simple_rank'
     # Parameter training method: [EM|BM]. Parameter training method can be specified
@@ -64,11 +64,11 @@ while rankclus_iter < config.t:
         rankclus_iter += 1
     print('Iteration ' + str(rankclus_iter))
 
-    with open('output.txt', 'w', encoding='utf-8') as f:
-        for i in range(config.K):
-            f.write('Cluster ' + str(i) + '\n')
-            feature_score, target_score, target_score_within = simple_rank(feature_target, target_feature, clusters[i])
-            for key in target_score_within.keys():
-                line = '{}:{}'.format(key, target_score_within[key]) 
-                print(line)
-                f.write(line + '\n')
+with open('output.txt', 'w', encoding='utf-8') as f:
+    for i in range(config.K):
+        f.write('Cluster ' + str(i) + '\n')
+        feature_score, target_score, target_score_within = simple_rank(feature_target, target_feature, clusters[i])
+        for key in target_score_within.keys():
+            line = '{}:{}'.format(key, target_score_within[key])
+            print(line)
+            f.write(line + '\n')
